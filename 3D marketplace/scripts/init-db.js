@@ -128,5 +128,6 @@ db.serialize(() => {
       process.exit(1);
     }
     console.log('✓ Database initialization completed successfully');
+    process.exit(0);
   });
 });

@@ -105,10 +105,16 @@ function runMigrations() {
             console.log(`✓ Migration ${migration.version} applied: ${migration.description}`);
             completed++;
 
-            if (completed === pendingMigrations.length) {
-              console.log('✓ All migrations completed successfully');
-              db.close();
-            }
+    if (completed === pendingMigrations.length) {
+      console.log('✓ All migrations completed successfully');
+      db.close((err) => {
+        if (err) {
+          console.error('Error closing database:', err);
+          process.exit(1);
+        }
+        process.exit(0);
+      });
+    }
           });
       });
     });
