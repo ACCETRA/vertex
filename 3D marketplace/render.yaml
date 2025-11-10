@@ -1,0 +1,41 @@
+services:
+  - type: web
+    name: 3d-marketplace
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    dockerContext: ./
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: DB_PATH
+        value: /opt/render/project/src/data/marketplace.db
+      - key: UPLOAD_PATH
+        value: /opt/render/project/src/uploads
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CORS_ORIGIN
+        fromService:
+          type: web
+          name: 3d-marketplace
+          property: host
+      - key: MAX_FILE_SIZE
+        value: 10485760
+      - key: ALLOWED_FILE_TYPES
+        value: .glb,.gltf,.obj,.fbx,.png,.jpg,.jpeg,.gif
+      - key: RATE_LIMIT_WINDOW
+        value: 15
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: 100
+      - key: LOG_LEVEL
+        value: info
+
+databases:
+  - name: marketplace-db
+    databaseName: marketplace
+    user: marketplace_user
+    plan: free
+    ipAllowList: []

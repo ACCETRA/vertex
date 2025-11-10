@@ -32,7 +32,7 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
   })"
 
 # Set database path environment variable
-ENV DB_PATH=/app/data/marketplace.db
+ENV DB_PATH=/opt/render/project/src/data/marketplace.db
 
 # Initialize database and start the application
 CMD ["sh", "-c", "npm run init-db && npm run migrate && npm start"]
