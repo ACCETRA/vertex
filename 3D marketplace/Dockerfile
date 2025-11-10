@@ -31,5 +31,5 @@ HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
     process.exit(res.statusCode === 200 ? 0 : 1) \
   })"
 
-# Start the application
-CMD ["npm", "start"]
+# Initialize database and start the application
+CMD ["sh", "-c", "npm run init-db && npm run migrate && npm start"]
