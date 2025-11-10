@@ -11,8 +11,8 @@ RUN npm ci --only=production && npm cache clean --force
 # Copy application code
 COPY . .
 
-# Create uploads directory
-RUN mkdir -p uploads logs
+# Create uploads and data directories
+RUN mkdir -p uploads logs data
 
 # Create non-root user
 RUN addgroup -g 1001 -S nodejs && \
